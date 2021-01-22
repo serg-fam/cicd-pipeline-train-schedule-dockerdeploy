@@ -15,9 +15,9 @@ pipeline {
             steps {
                 script {
                     app = docker.build("sergifam/train-schedule")
-                  //  app.inside {
+                    app.inside {
                   //    sh 'echo $(curl 172.20.126.239:80)'
-                  // }
+                   }
                 }
             }
         }

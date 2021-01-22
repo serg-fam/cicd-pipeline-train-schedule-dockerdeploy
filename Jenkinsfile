@@ -16,7 +16,7 @@ pipeline {
                 script {
                     app = docker.build("sergifam/train-schedule")
                     app.inside {
-                        sh 'echo $(curl 172.20.126.239:9090)'
+                        sh 'echo $(curl 172.20.126.239:80)'
                     }
                 }
             }
@@ -50,7 +50,7 @@ pipeline {
                         } catch (err) {
                             echo: 'caught error: $err'
                         }
-                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker run --restart always --name train-schedule -p 8080:9090 -d sergifam/train-schedule:${env.BUILD_NUMBER}\""
+                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker run --restart always --name train-schedule -p 8080:80-d sergifam/train-schedule:${env.BUILD_NUMBER}\""
                     }
                 }
             }
